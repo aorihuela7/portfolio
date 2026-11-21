@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
 import type { CaseStudy, Section } from "@/data/types";
 import { BentoCard, MetaBar, Tag } from "@/components/ui/Bento";
 import { GitHubIcon } from "@/components/ui/BrandIcons";
@@ -83,12 +83,13 @@ export function CaseStudyPage({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={
-                      l.kind === "live"
+                      l.kind === "live" || l.kind === "official"
                         ? "inline-flex h-11 items-center gap-2 rounded-full bg-accent-ink px-5 text-sm font-semibold text-white transition hover:bg-[#9a3412] dark:text-[#09090b] dark:hover:bg-accent-hover"
                         : "inline-flex h-11 items-center gap-2 rounded-full border border-line bg-surface px-5 text-sm font-semibold text-ink transition hover:border-line-strong"
                     }
                   >
                     {l.kind === "repo" ? <GitHubIcon className="size-4" /> : null}
+                    {l.kind === "official" ? <BadgeCheck className="size-4" aria-hidden /> : null}
                     {l.label}
                     <ArrowUpRight className="size-4" aria-hidden />
                   </a>

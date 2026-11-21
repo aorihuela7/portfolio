@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
 import { leadership } from "@/data/portfolio";
 import { BentoCard, MetaBar, SectionHeader, Tag, cx } from "@/components/ui/Bento";
 import { RichText } from "@/components/ui/RichText";
@@ -55,10 +55,27 @@ export function LeadershipSection() {
             <p className="mt-4 text-[15px] leading-relaxed text-ink-2">
               <RichText text={entry.summary} />
             </p>
-            <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-accent-ink">
-              {entry.ctaLabel}
-              <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden />
-            </span>
+            <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-6">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent-ink">
+                {entry.ctaLabel}
+                <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden />
+              </span>
+              {entry.links
+                ?.filter((l) => l.kind === "official")
+                .map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative z-10 inline-flex items-center gap-1.5 rounded-full border border-green/30 bg-green-soft px-3 py-1.5 font-mono text-[11px] font-medium text-green-ink transition hover:border-green"
+                  >
+                    <BadgeCheck className="size-3.5" aria-hidden />
+                    Official club page <ArrowUpRight className="size-3" aria-hidden />
+                    <span className="sr-only">(opens TottenhamHotspur.com in a new tab)</span>
+                  </a>
+                ))}
+            </div>
           </BentoCard>
         ))}
       </div>

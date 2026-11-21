@@ -1272,6 +1272,13 @@ export const leadership: CaseStudy[] = [
       { label: "Members", value: "50+ active" },
       { label: "Recognition", value: "Official Supporters' Club, from 2021/22" },
     ],
+    links: [
+      {
+        label: "Official club page on TottenhamHotspur.com",
+        href: "https://www.tottenhamhotspur.com/supporters-clubs/873906/peru-spurs-spurs-official-supporters-club",
+        kind: "official",
+      },
+    ],
     cover: {
       src: "/assets/leadership/peru-spurs/mollys-watch-party.jpg",
       alt: "A large group of Peru Spurs members in Tottenham shirts holding club flags at a watch party.",

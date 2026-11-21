@@ -44,7 +44,7 @@ export type Fact = { label: string; value: string };
 export type ExternalLink = {
   label: string;
   href: string;
-  kind: "live" | "repo" | "doc";
+  kind: "live" | "repo" | "official" | "doc";
 };
 
 export type Block =
