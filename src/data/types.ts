@@ -31,7 +31,6 @@ export type Video = {
 
 /** Bespoke SVG visuals used when a tile has no photo (or as diagrams). */
 export type VisualKey =
-  | "chicago"
   | "transit"
   | "pki"
   | "hydration"

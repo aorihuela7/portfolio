@@ -1,5 +1,4 @@
-import { Award, GraduationCap } from "lucide-react";
-import { education, principles, skills } from "@/data/portfolio";
+import { principles, skills } from "@/data/portfolio";
 import { BentoCard, MetaBar, SectionHeader, Tag } from "@/components/ui/Bento";
 
 export function ToolkitSection() {
@@ -36,67 +35,11 @@ export function ToolkitSection() {
         ))}
       </ol>
 
-      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-12">
-        {/* EDU.01 */}
-        <BentoCard id="education" className="scroll-mt-24 lg:col-span-5">
-          <MetaBar code={education.code} tag="Education & Honors" />
-          <div className="flex items-start gap-3">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-ink">
-              <GraduationCap className="size-5" aria-hidden />
-            </span>
-            <div>
-              <h3 className="text-xl font-bold text-ink">{education.school}</h3>
-              <p className="text-sm text-ink-3">{education.location}</p>
-            </div>
-          </div>
-          <ol className="mt-6 space-y-4 border-l border-line pl-5">
-            {education.degrees.map((d) => (
-              <li key={d.degree} className="relative">
-                <span
-                  aria-hidden
-                  className="absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-accent bg-surface"
-                />
-                <p className="font-semibold leading-snug text-ink">{d.degree}</p>
-                <p className="text-sm text-ink-2">{d.detail}</p>
-                <p className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-ink-3">
-                  {d.date}
-                </p>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-6">
-            <p className="mb-2 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-3">
-              <Award className="size-3.5" aria-hidden /> Honors & Research Grants
-            </p>
-            <ul className="flex flex-wrap gap-1.5">
-              {education.honors.map((h, i) => (
-                <li key={h}>
-                  <Tag tone={i < 2 ? "accent" : "neutral"}>{h}</Tag>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mt-6">
-            <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-3">
-              Selected Coursework
-            </p>
-            <ul className="grid gap-1 text-sm text-ink-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-              {education.coursework.map((c) => (
-                <li key={c} className="flex gap-2">
-                  <span aria-hidden className="text-ink-3">
-                    —
-                  </span>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </BentoCard>
-
+      <div className="mt-4">
         {/* STK.01 */}
-        <BentoCard className="lg:col-span-7">
+        <BentoCard>
           <MetaBar code={skills.code} tag="Technical Skills Matrix" />
-          <div className="gap-8 sm:columns-2">
+          <div className="gap-10 sm:columns-2 lg:columns-3">
             {skills.groups.map((g) => (
               <div key={g.label} className="mb-6 break-inside-avoid last:mb-0">
                 <h3 className="mb-2.5 flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-ink">

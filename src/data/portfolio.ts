@@ -20,24 +20,11 @@ export const hero = {
   headline:
     "Building resilient software systems and tactile, human-centered interfaces.",
   intro:
-    "I'm **Alejandro Orihuela**, an M.S. in Computer Science candidate at the **University of Chicago** specializing in Software Engineering, following a B.S. in Computer Science (HCI Specialization) and a B.A. with Honors in Latin American and Caribbean Studies. I bridge backend architecture, rapid hardware/software prototyping, and inclusive design to build tools people genuinely enjoy using.",
+    "I'm **Alejandro Orihuela**, an M.S. in Computer Science candidate at the **University of Chicago** specializing in Software Engineering, following a B.S. in Computer Science (HCI Specialization) and a B.A. with Honors in Latin American and Caribbean Studies also at The University of Chicago. I bridge backend architecture, rapid hardware/software prototyping, and inclusive design to build tools people genuinely enjoy using.",
   location: {
     code: "LOC.01",
     city: "Chicago, IL",
     note: "Open to relocation & remote",
-  },
-  spec: {
-    code: "EDU.27",
-    rows: [
-      { label: "Institution", value: "University of Chicago" },
-      { label: "Degree", value: "M.S. CS '27 (4+1 MPCS)" },
-      { label: "Focus", value: "Systems · HCI · Hardware" },
-      { label: "Languages", value: "EN · ES · PT" },
-    ],
-    timeline: [
-      { year: "2026", label: "B.S. CS + B.A. LACS", done: true },
-      { year: "2027", label: "M.S. CS (MPCS)", done: false },
-    ],
   },
 };
 
@@ -1360,17 +1347,20 @@ export const education = {
     {
       degree: "M.S. in Computer Science (4+1 MPCS)",
       detail: "Software Engineering Specialization",
-      date: "Expected Dec 2027",
+      date: "Expected graduation · December 2027",
+      status: "in-progress",
     },
     {
       degree: "B.S. in Computer Science",
       detail: "Human-Computer Interaction Specialization",
       date: "June 2026",
+      status: "completed",
     },
     {
       degree: "B.A. in Latin American and Caribbean Studies",
       detail: "With Honors",
       date: "June 2026",
+      status: "completed",
     },
   ],
   honors: [
@@ -1463,7 +1453,7 @@ export const skills = {
     },
     {
       label: "Human Languages",
-      items: ["Spanish (Native)", "English (Fluent)", "Portuguese (Professional)"],
+      items: ["Spanish (Native)", "English (Fluent)", "Portuguese (Fluent)"],
     },
   ],
 };

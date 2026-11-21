@@ -1,5 +1,4 @@
 import type { VisualKey } from "@/data/types";
-import { ChicagoGrid } from "./ChicagoGrid";
 import { HydrationStates } from "./HydrationStates";
 import { FlightArc, RunningSplits } from "./Mini";
 import { NewsletterPipeline } from "./NewsletterPipeline";
@@ -10,8 +9,6 @@ import { TransitRoute } from "./TransitRoute";
 /** Maps a VisualKey from the data layer to its bespoke component. */
 export function Visual({ name, className }: { name: VisualKey; className?: string }) {
   switch (name) {
-    case "chicago":
-      return <ChicagoGrid className={className} />;
     case "transit":
       return (
         <div className={`flex h-full items-center bg-surface-2 p-6 ${className ?? ""}`}>
