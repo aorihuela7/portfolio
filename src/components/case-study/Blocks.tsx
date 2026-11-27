@@ -228,8 +228,12 @@ export function BlockRenderer({ block, index }: { block: Block; index: number })
                   </p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2 lg:col-span-8">
-                  {item.before ? <Figure media={item.before} label="Before" /> : null}
-                  {item.after ? <Figure media={item.after} label="After" /> : null}
+                  {item.before ? (
+                    <Figure media={item.before} label={block.labels?.[0] ?? "Before"} />
+                  ) : null}
+                  {item.after ? (
+                    <Figure media={item.after} label={block.labels?.[1] ?? "After"} />
+                  ) : null}
                 </div>
               </li>
             ))}

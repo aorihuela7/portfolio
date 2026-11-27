@@ -892,186 +892,8 @@ export const projects: CaseStudy[] = [
     ],
   },
   {
-    slug: "hydration-system",
-    code: "PRJ.03",
-    title: "Actuated Hydration System: A Haptic Smart Glass",
-    shortTitle: "Actuated Hydration System",
-    period: "2026",
-    categories: ["Physical Computing & IoT", "HCI & Inclusive Design"],
-    tags: ["Arduino UNO R3", "C++", "MPU-6050 IMU", "Haptics & Servo"],
-    summary:
-      "A physical-computing prototype that fits around an ordinary drinking glass: a haptic wristband nudges you to drink, an IMU detects when the glass tilts, and a servo taps the glass—slowing as you drink—until you hit your goal.",
-    intro:
-      "Hydration is easy to forget when you're deep in screen work. Rather than another logging app, this actuated system adapts to a regular glass, uses motion to signal when it's time to drink, and turns progress into touch: taps that slow down as you drink and stop when you've had enough.",
-    highlights: [
-      "Embedded **C++ on Arduino UNO R3**: a three-state loop driven by the glass's tilt angle from an **MPU-6050** IMU.",
-      "Closed-loop actuation: a **DRV2605L** haptic wristband for reminders, plus a servo whose tap rate slows as you drink.",
-      "Custom **3D-printed holder** modeled in Autodesk Fusion, with a live **Processing** dashboard showing state, angle, and timers.",
-    ],
-    facts: [
-      { label: "Type", value: "Physical computing · actuated interface" },
-      { label: "Hardware", value: "Arduino UNO R3 · IMU · haptics · servo" },
-      { label: "Fabrication", value: "3D-printed holder (Autodesk Fusion)" },
-      { label: "Testing", value: "Discovery study · 3 participants" },
-    ],
-    stack: [
-      "Arduino UNO R3",
-      "C++",
-      "Processing",
-      "MPU-6050 (accelerometer + gyro)",
-      "DRV2605L haptic driver",
-      "Servo motor",
-      "Autodesk Fusion (CAD)",
-      "3D Printing",
-      "Tinkercad",
-    ],
-    cover: {
-      src: "/assets/projects/hydration-system/assembled-holder.jpg",
-      alt: "A 3D-printed ring-shaped glass holder with a servo motor and MPU-6050 sensor mounted on it, wired to a breadboard.",
-      caption: "The assembled holder: servo tapper and MPU-6050 mounted on the 3D-printed ring.",
-      position: "center 55%",
-    },
-    visual: "hydration",
-    blocks: [
-      {
-        type: "text",
-        eyebrow: "Problem",
-        heading: "Everyone knows to drink water. Few remember to.",
-        paragraphs: [
-          "Hydration is one of those habits we need to be reminded of to actually do—especially when distracted by computer work. Logging every sip in an app interrupts focus, so most people stop.",
-          "The goal: a reminder that lives on the glass you already use, communicates through **motion and touch** instead of another screen notification, and confirms when you've met your target.",
-        ],
-      },
-      {
-        type: "visual",
-        eyebrow: "System Behavior",
-        heading: "A three-state interaction loop",
-        intro:
-          "Arduino and a Processing dashboard start in sync, then the system cycles through three states driven by the glass's tilt angle.",
-        visual: "hydration",
-        caption:
-          "Timings were shortened for the exhibition demo and designed to be user-configurable.",
-      },
-      {
-        type: "cards",
-        eyebrow: "States",
-        heading: "How each state feels to the user",
-        columns: 3,
-        items: [
-          {
-            kicker: "State 01",
-            title: "Needs to drink",
-            body: "The wristband fires **5 rapid vibration pulses every 5 seconds**. After the third cycle, the servo starts tapping the side of the glass every **200 ms** until the user picks it up.",
-          },
-          {
-            kicker: "State 02",
-            title: "Drinking",
-            body: "A tilt of **≥ 45°** stops the vibrations. Taps stretch from **200 ms toward 1,000 ms** as you drink, and stop once **7 seconds** of cumulative tilt are reached—drinking in parts is supported.",
-          },
-          {
-            kicker: "State 03",
-            title: "Rest",
-            body: "All actuators go silent for **30 seconds** after a completed drink, then the system returns to “needs to drink” and the cycle repeats.",
-          },
-        ],
-      },
-      {
-        type: "list",
-        eyebrow: "Hardware & Software",
-        heading: "What's inside",
-        items: [
-          {
-            title: "MPU-6050 motion sensor",
-            body: "Reads the glass angle to distinguish resting on a surface from drinking.",
-          },
-          {
-            title: "DRV2605L haptic driver + vibration motor",
-            body: "Delivers reminder pulses through a wristband, so the cue reaches you even when you're looking at a screen.",
-          },
-          {
-            title: "Servo motor “tapper”",
-            body: "Produces persistent taps on the glass, conveying drinking progress through touch.",
-          },
-          {
-            title: "Custom 3D-printed holder",
-            body: "Modeled in Autodesk Fusion to adapt to a regular drinking glass, with mounts for the servo and sensor.",
-          },
-          {
-            title: "Live Processing dashboard",
-            body: "Displays the current mode, drink time out of 7 s, glass angle, time until the next drink, and vibration count.",
-          },
-        ],
-      },
-      {
-        type: "text",
-        eyebrow: "User Testing",
-        heading: "What happened when people used it",
-        paragraphs: [
-          "Three participants received only a one-line overview and had to discover the interaction themselves. **All three figured it out**, though one needed a few extra vibration cycles.",
-          "Two gripped the glass from an unexpected side and had to tilt past 45° before drinking time registered. It also wasn't obvious that the glass was attached to the base, and the cables ran short for taller participants—concrete issues that shaped the next iteration.",
-        ],
-      },
-      {
-        type: "list",
-        eyebrow: "Future Work",
-        heading: "Where it goes next",
-        items: [
-          {
-            title: "Go wireless",
-            body: "Replace the wired wristband and glass connections for freedom of movement.",
-          },
-          {
-            title: "Sense water, not angle",
-            body: "Measure water level instead of tilt, removing the constraint of drinking from a specific side.",
-          },
-          {
-            title: "Relocate the servo",
-            body: "Move the tapper beneath the glass so it never obstructs the grip—and looks cleaner.",
-          },
-          {
-            title: "Personalize everything",
-            body: "Convert drink time to milliliters and let users set their own goals, rest periods, and vibration frequency.",
-          },
-        ],
-      },
-    ],
-    galleryHeading: "Build log",
-    gallery: [
-      {
-        src: "/assets/projects/hydration-system/assembled-holder.jpg",
-        alt: "Assembled 3D-printed holder with servo and MPU-6050 sensor.",
-        caption: "Assembled holder with the servo tapper and MPU-6050 sensor.",
-      },
-      {
-        src: "/assets/projects/hydration-system/breadboard-prototype.jpg",
-        alt: "Arduino, breadboard, haptic driver, and a glass connected with jumper wires on a wooden desk.",
-        caption: "Full prototype wired up: Arduino UNO, breadboard, haptic driver, and glass.",
-      },
-      {
-        src: "/assets/projects/hydration-system/3d-printed-parts.jpg",
-        alt: "Orange 3D-printed circular parts on a dark mat.",
-        caption: "Early 3D-printed parts while iterating on the holder's fit.",
-      },
-      {
-        src: "/assets/projects/hydration-system/cad-model.jpg",
-        alt: "Autodesk Fusion CAD model of the ring holder with a servo mount and clip pieces.",
-        caption: "CAD model of the holder and clips in Autodesk Fusion.",
-      },
-      {
-        src: "/assets/projects/hydration-system/circuit-diagram.jpg",
-        alt: "Tinkercad wiring diagram connecting an Arduino UNO, MPU-6050, DRV2605L, vibration motor, and servo.",
-        caption: "Wiring view: Arduino UNO, MPU-6050, DRV2605L, vibration motor, and servo.",
-      },
-      {
-        src: "/assets/projects/hydration-system/schematic.jpg",
-        alt: "Electrical schematic of the hydration system made in Tinkercad.",
-        caption: "Circuit schematic.",
-      },
-    ],
-  },
-  {
     slug: "record-organizer",
-    code: "PRJ.04",
+    code: "PRJ.03",
     title: "Record Organizer: Vinyl Shelf Mapping & Archival Toolkit",
     shortTitle: "Record Organizer",
     period: "2026",
@@ -1278,14 +1100,192 @@ export const projects: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: "hydration-system",
+    code: "PRJ.04",
+    title: "Actuated Hydration System: A Haptic Smart Glass",
+    shortTitle: "Actuated Hydration System",
+    period: "2026",
+    categories: ["Physical Computing & IoT", "HCI & Inclusive Design"],
+    tags: ["Arduino UNO R3", "C++", "MPU-6050 IMU", "Haptics & Servo"],
+    summary:
+      "A physical-computing prototype that fits around an ordinary drinking glass: a haptic wristband nudges you to drink, an IMU detects when the glass tilts, and a servo taps the glass—slowing as you drink—until you hit your goal.",
+    intro:
+      "Hydration is easy to forget when you're deep in screen work. Rather than another logging app, this actuated system adapts to a regular glass, uses motion to signal when it's time to drink, and turns progress into touch: taps that slow down as you drink and stop when you've had enough.",
+    highlights: [
+      "Embedded **C++ on Arduino UNO R3**: a three-state loop driven by the glass's tilt angle from an **MPU-6050** IMU.",
+      "Closed-loop actuation: a **DRV2605L** haptic wristband for reminders, plus a servo whose tap rate slows as you drink.",
+      "Custom **3D-printed holder** modeled in Autodesk Fusion, with a live **Processing** dashboard showing state, angle, and timers.",
+    ],
+    facts: [
+      { label: "Type", value: "Physical computing · actuated interface" },
+      { label: "Hardware", value: "Arduino UNO R3 · IMU · haptics · servo" },
+      { label: "Fabrication", value: "3D-printed holder (Autodesk Fusion)" },
+      { label: "Testing", value: "Discovery study · 3 participants" },
+    ],
+    stack: [
+      "Arduino UNO R3",
+      "C++",
+      "Processing",
+      "MPU-6050 (accelerometer + gyro)",
+      "DRV2605L haptic driver",
+      "Servo motor",
+      "Autodesk Fusion (CAD)",
+      "3D Printing",
+      "Tinkercad",
+    ],
+    cover: {
+      src: "/assets/projects/hydration-system/assembled-holder.jpg",
+      alt: "A 3D-printed ring-shaped glass holder with a servo motor and MPU-6050 sensor mounted on it, wired to a breadboard.",
+      caption: "The assembled holder: servo tapper and MPU-6050 mounted on the 3D-printed ring.",
+      position: "center 55%",
+    },
+    visual: "hydration",
+    blocks: [
+      {
+        type: "text",
+        eyebrow: "Problem",
+        heading: "Everyone knows to drink water. Few remember to.",
+        paragraphs: [
+          "Hydration is one of those habits we need to be reminded of to actually do—especially when distracted by computer work. Logging every sip in an app interrupts focus, so most people stop.",
+          "The goal: a reminder that lives on the glass you already use, communicates through **motion and touch** instead of another screen notification, and confirms when you've met your target.",
+        ],
+      },
+      {
+        type: "visual",
+        eyebrow: "System Behavior",
+        heading: "A three-state interaction loop",
+        intro:
+          "Arduino and a Processing dashboard start in sync, then the system cycles through three states driven by the glass's tilt angle.",
+        visual: "hydration",
+        caption:
+          "Timings were shortened for the exhibition demo and designed to be user-configurable.",
+      },
+      {
+        type: "cards",
+        eyebrow: "States",
+        heading: "How each state feels to the user",
+        columns: 3,
+        items: [
+          {
+            kicker: "State 01",
+            title: "Needs to drink",
+            body: "The wristband fires **5 rapid vibration pulses every 5 seconds**. After the third cycle, the servo starts tapping the side of the glass every **200 ms** until the user picks it up.",
+          },
+          {
+            kicker: "State 02",
+            title: "Drinking",
+            body: "A tilt of **≥ 45°** stops the vibrations. Taps stretch from **200 ms toward 1,000 ms** as you drink, and stop once **7 seconds** of cumulative tilt are reached—drinking in parts is supported.",
+          },
+          {
+            kicker: "State 03",
+            title: "Rest",
+            body: "All actuators go silent for **30 seconds** after a completed drink, then the system returns to “needs to drink” and the cycle repeats.",
+          },
+        ],
+      },
+      {
+        type: "list",
+        eyebrow: "Hardware & Software",
+        heading: "What's inside",
+        items: [
+          {
+            title: "MPU-6050 motion sensor",
+            body: "Reads the glass angle to distinguish resting on a surface from drinking.",
+          },
+          {
+            title: "DRV2605L haptic driver + vibration motor",
+            body: "Delivers reminder pulses through a wristband, so the cue reaches you even when you're looking at a screen.",
+          },
+          {
+            title: "Servo motor “tapper”",
+            body: "Produces persistent taps on the glass, conveying drinking progress through touch.",
+          },
+          {
+            title: "Custom 3D-printed holder",
+            body: "Modeled in Autodesk Fusion to adapt to a regular drinking glass, with mounts for the servo and sensor.",
+          },
+          {
+            title: "Live Processing dashboard",
+            body: "Displays the current mode, drink time out of 7 s, glass angle, time until the next drink, and vibration count.",
+          },
+        ],
+      },
+      {
+        type: "text",
+        eyebrow: "User Testing",
+        heading: "What happened when people used it",
+        paragraphs: [
+          "Three participants received only a one-line overview and had to discover the interaction themselves. **All three figured it out**, though one needed a few extra vibration cycles.",
+          "Two gripped the glass from an unexpected side and had to tilt past 45° before drinking time registered. It also wasn't obvious that the glass was attached to the base, and the cables ran short for taller participants—concrete issues that shaped the next iteration.",
+        ],
+      },
+      {
+        type: "list",
+        eyebrow: "Future Work",
+        heading: "Where it goes next",
+        items: [
+          {
+            title: "Go wireless",
+            body: "Replace the wired wristband and glass connections for freedom of movement.",
+          },
+          {
+            title: "Sense water, not angle",
+            body: "Measure water level instead of tilt, removing the constraint of drinking from a specific side.",
+          },
+          {
+            title: "Relocate the servo",
+            body: "Move the tapper beneath the glass so it never obstructs the grip—and looks cleaner.",
+          },
+          {
+            title: "Personalize everything",
+            body: "Convert drink time to milliliters and let users set their own goals, rest periods, and vibration frequency.",
+          },
+        ],
+      },
+    ],
+    galleryHeading: "Build log",
+    gallery: [
+      {
+        src: "/assets/projects/hydration-system/assembled-holder.jpg",
+        alt: "Assembled 3D-printed holder with servo and MPU-6050 sensor.",
+        caption: "Assembled holder with the servo tapper and MPU-6050 sensor.",
+      },
+      {
+        src: "/assets/projects/hydration-system/breadboard-prototype.jpg",
+        alt: "Arduino, breadboard, haptic driver, and a glass connected with jumper wires on a wooden desk.",
+        caption: "Full prototype wired up: Arduino UNO, breadboard, haptic driver, and glass.",
+      },
+      {
+        src: "/assets/projects/hydration-system/3d-printed-parts.jpg",
+        alt: "Orange 3D-printed circular parts on a dark mat.",
+        caption: "Early 3D-printed parts while iterating on the holder's fit.",
+      },
+      {
+        src: "/assets/projects/hydration-system/cad-model.jpg",
+        alt: "Autodesk Fusion CAD model of the ring holder with a servo mount and clip pieces.",
+        caption: "CAD model of the holder and clips in Autodesk Fusion.",
+      },
+      {
+        src: "/assets/projects/hydration-system/circuit-diagram.jpg",
+        alt: "Tinkercad wiring diagram connecting an Arduino UNO, MPU-6050, DRV2605L, vibration motor, and servo.",
+        caption: "Wiring view: Arduino UNO, MPU-6050, DRV2605L, vibration motor, and servo.",
+      },
+      {
+        src: "/assets/projects/hydration-system/schematic.jpg",
+        alt: "Electrical schematic of the hydration system made in Tinkercad.",
+        caption: "Circuit schematic.",
+      },
+    ],
+  },
 ];
 
 /** Desktop column spans for the asymmetrical 5 + 7 / 7 + 5 Home grid. */
 export const projectSpans: Record<string, string> = {
   "digital-signature": "lg:col-span-5",
   "study-spaces-map": "lg:col-span-7",
-  "hydration-system": "lg:col-span-7",
-  "record-organizer": "lg:col-span-5",
+  "record-organizer": "lg:col-span-7",
+  "hydration-system": "lg:col-span-5",
 };
 
 /**
@@ -1985,6 +1985,61 @@ export const beyond: CaseStudy[] = [
         paragraphs: [
           "My biggest personal project is a replica of the **Estadio Monumental**, Universitario de Deportes' home in Lima and the largest stadium in Peru. I designed it myself without an official kit or instructions, and the finished model uses **more than 21,000 pieces**.",
           "The details make it recognizably the U's stadium: the red **U crest** built into the stands, plaques for the **Trinchera Norte** and **Barra Oriente 1968** supporter stands, a pixel-art portrait mosaic in the crowd, and thousands of multicolored studs that read as a packed stadium from a distance. A smartphone mounted on the roofline works as the video board.",
+        ],
+      },
+      {
+        type: "iterations",
+        eyebrow: "Real vs. replica",
+        heading: "The real Monumental, side by side with mine",
+        intro:
+          "The goal was a model you'd recognize at a glance. Here are three views of the real stadium in Lima next to the same features in the LEGO version.",
+        labels: ["Real stadium", "LEGO replica"],
+        items: [
+          {
+            kicker: "View 01",
+            title: "The U crest over Trinchera Norte",
+            body: "The giant **U crest** painted across the north stand is the stadium's signature, with the Trinchera Norte sign along the pitch below it. In the replica the crest is built into the stands brick by brick.",
+            before: {
+              src: "/assets/beyond/lego/real-monumental-trinchera-norte.jpg",
+              alt: "The real Estadio Monumental seen from the pitch, with a giant red and white U crest across the north stand and a Trinchera Norte sign below it.",
+              caption: "The north stand and its U crest, seen from the pitch.",
+            },
+            after: {
+              src: "/assets/beyond/lego/monumental-pitch-level.jpg",
+              alt: "Pitch-level view of the LEGO stadium looking toward the goal and the red U crest in the stands.",
+              caption: "The same view in LEGO: pitch level, toward the goal and the crest.",
+            },
+          },
+          {
+            kicker: "View 02",
+            title: "A bowl of multicolored seats",
+            body: "The real Monumental's seats come in many colors, so an empty stand still looks busy. I used **thousands of multicolored studs** to get the same effect, and from a distance they read as a packed crowd.",
+            before: {
+              src: "/assets/beyond/lego/real-monumental-aerial.jpg",
+              alt: "Aerial view of the real Estadio Monumental with multicolored seats around a green pitch and the U crest on the far stand.",
+              caption: "From above: multicolored seats wrapped around the pitch.",
+            },
+            after: {
+              src: "/assets/beyond/lego/monumental-overview.jpg",
+              alt: "Wide view across the LEGO stadium showing a crowd made of multicolored studs, the U crest, and the pitch.",
+              caption: "In LEGO: a crowd of multicolored studs, the crest, and a portrait mosaic.",
+            },
+          },
+          {
+            kicker: "View 03",
+            title: "Rings of upper tiers",
+            body: "Stacked rings of upper tiers wrap around the real bowl. In the replica those rings frame the crest and the **Trinchera Norte** stand from above.",
+            before: {
+              src: "/assets/beyond/lego/real-monumental-panorama.jpg",
+              alt: "Panorama of the real Estadio Monumental at sunset, with stacked upper tiers curving around the pitch and hills behind the stadium.",
+              caption: "A panorama of the bowl and its stacked upper tiers.",
+            },
+            after: {
+              src: "/assets/beyond/lego/monumental-trinchera-norte.jpg",
+              alt: "The U crest and Trinchera Norte plaque seen through a gap in the LEGO stadium's upper ring.",
+              caption: "The crest and Trinchera Norte, seen through the replica's upper ring.",
+            },
+          },
         ],
       },
       {

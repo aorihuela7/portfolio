@@ -102,6 +102,8 @@ export type Block =
       eyebrow?: string;
       heading: string;
       intro?: string;
+      /** Labels for the two images. Defaults to ["Before", "After"]. */
+      labels?: [string, string];
       items: {
         kicker: string;
         title: string;
