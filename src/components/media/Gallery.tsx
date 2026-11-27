@@ -45,7 +45,11 @@ export function Gallery({
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                  className={
+                    img.fit === "contain"
+                      ? "object-contain p-2 transition duration-500 group-hover:scale-[1.02]"
+                      : "object-cover transition duration-500 group-hover:scale-[1.03]"
+                  }
                   style={{ objectPosition: img.position ?? "center" }}
                 />
                 <span className="absolute right-3 top-3 flex size-8 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white opacity-0 backdrop-blur transition group-hover:opacity-100 group-focus-within:opacity-100">

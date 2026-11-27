@@ -48,7 +48,7 @@ export function VideoPreview({ video }: { video: Video }) {
         className="h-full w-full object-cover object-top"
       />
       <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/60 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-wider text-white backdrop-blur">
-        <Play className="size-3 fill-current" aria-hidden /> Demo Video
+        <Play className="size-3 fill-current" aria-hidden /> {video.tag ?? "Demo"} Video
         {video.duration ? <span className="text-white/60">· {video.duration}</span> : null}
       </span>
     </div>

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Check } from "lucide-react";
 import type { CaseStudy, Section } from "@/data/types";
 import { BentoCard, MetaBar, Tag } from "@/components/ui/Bento";
-import { GitHubIcon } from "@/components/ui/BrandIcons";
+import { GitHubIcon, InstagramIcon } from "@/components/ui/BrandIcons";
 import { RichText } from "@/components/ui/RichText";
 import { Gallery } from "@/components/media/Gallery";
 import { VideoFrame } from "@/components/media/VideoFrame";
@@ -13,8 +13,9 @@ import { BlockRenderer } from "./Blocks";
 
 const sectionMeta: Record<Section, { label: string; back: string }> = {
   research: { label: "Research", back: "/#research" },
-  projects: { label: "Projects", back: "/#projects" },
+  projects: { label: "Portfolio", back: "/projects" },
   leadership: { label: "Leadership", back: "/#leadership" },
+  beyond: { label: "Beyond the Code", back: "/#about" },
 };
 
 export function CaseStudyPage({
@@ -74,6 +75,23 @@ export function CaseStudyPage({
                 ))}
               </ul>
             ) : null}
+            {entry.highlights?.length ? (
+              <div className="mt-6 max-w-3xl rounded-2xl border border-line bg-canvas p-4 sm:p-5">
+                <p className="mb-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-3">
+                  Engineering highlights
+                </p>
+                <ul className="space-y-2 text-sm leading-relaxed text-ink-2">
+                  {entry.highlights.map((h) => (
+                    <li key={h} className="flex gap-2.5">
+                      <Check className="mt-1 size-3.5 shrink-0 text-green" aria-hidden />
+                      <span>
+                        <RichText text={h} />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             {entry.links?.length ? (
               <div className="mt-6 flex flex-wrap gap-3">
                 {entry.links.map((l) => (
@@ -89,6 +107,7 @@ export function CaseStudyPage({
                     }
                   >
                     {l.kind === "repo" ? <GitHubIcon className="size-4" /> : null}
+                    {l.kind === "instagram" ? <InstagramIcon className="size-4" /> : null}
                     {l.kind === "official" ? <BadgeCheck className="size-4" aria-hidden /> : null}
                     {l.label}
                     <ArrowUpRight className="size-4" aria-hidden />
@@ -157,7 +176,7 @@ export function CaseStudyPage({
                 fill
                 priority
                 sizes="(min-width: 1280px) 1232px, 100vw"
-                className="object-cover"
+                className={entry.cover.fit === "contain" ? "object-contain p-4 sm:p-6" : "object-cover"}
                 style={{ objectPosition: entry.cover.position ?? "center" }}
               />
             </div>
@@ -168,8 +187,11 @@ export function CaseStudyPage({
             ) : null}
           </figure>
         ) : entry.visual ? (
-          <div className="overflow-hidden rounded-3xl border border-line">
-            <Visual name={entry.visual} />
+          <div className="overflow-hidden rounded-3xl border border-line bg-surface-2">
+            <Visual
+              name={entry.visual}
+              className={entry.visual === "running" ? "mx-auto block max-h-[360px] w-full" : undefined}
+            />
           </div>
         ) : null}
       </div>

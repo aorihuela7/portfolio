@@ -19,6 +19,8 @@ export type Media = {
   caption?: string;
   /** CSS object-position for cropped previews, e.g. "center top". */
   position?: string;
+  /** "contain" shows the whole image (UI screenshots) instead of cropping it. */
+  fit?: "cover" | "contain";
 };
 
 export type Video = {
@@ -27,6 +29,10 @@ export type Video = {
   /** Short label for the frame, e.g. "Final prototype walkthrough". */
   label: string;
   duration?: string;
+  /** Prefix in the frame header and Home badge. Defaults to "Demo". */
+  tag?: string;
+  /** CSS aspect ratio of the player. Defaults to "3 / 2". */
+  aspect?: string;
 };
 
 /** Bespoke SVG visuals used when a tile has no photo (or as diagrams). */
@@ -36,15 +42,14 @@ export type VisualKey =
   | "hydration"
   | "terminal"
   | "newsletter"
-  | "running"
-  | "aviation";
+  | "running";
 
 export type Fact = { label: string; value: string };
 
 export type ExternalLink = {
   label: string;
   href: string;
-  kind: "live" | "repo" | "official" | "doc";
+  kind: "live" | "repo" | "official" | "doc" | "instagram";
 };
 
 export type Block =
@@ -124,6 +129,39 @@ export type Block =
       type: "principle";
       eyebrow?: string;
       text: string;
+    }
+  | {
+      /** Vertical timeline; each stop can carry one photo. */
+      type: "timeline";
+      eyebrow?: string;
+      heading: string;
+      intro?: string;
+      items: { kicker: string; title: string; body: string; media?: Media }[];
+    }
+  | {
+      /** An in-page photo grid with lightbox (in addition to the page gallery). */
+      type: "gallery";
+      eyebrow?: string;
+      heading: string;
+      intro?: string;
+      columns?: 2 | 3;
+      images: Media[];
+    }
+  | {
+      type: "video";
+      eyebrow?: string;
+      heading: string;
+      intro?: string;
+      video: Video;
+    }
+  | {
+      /** A highlighted link to another page on the site or an external page. */
+      type: "cta";
+      eyebrow?: string;
+      heading: string;
+      text: string;
+      href: string;
+      label: string;
     };
 
 export type CaseStudy = {
@@ -147,10 +185,14 @@ export type CaseStudy = {
   /** Longer intro for the detail page header. Falls back to `summary`. */
   intro?: string;
   metrics?: string[];
+  /** 3–4 short technical bullets for project cards and the /projects portfolio. */
+  highlights?: string[];
   facts?: Fact[];
   stack?: string[];
   links?: ExternalLink[];
   cover?: Media;
+  /** Optional alternate image for compact Home tiles (falls back to `cover`). */
+  thumbnail?: Media;
   visual?: VisualKey;
   video?: Video;
   ctaLabel?: string;
@@ -159,4 +201,4 @@ export type CaseStudy = {
   galleryHeading?: string;
 };
 
-export type Section = "research" | "projects" | "leadership";
+export type Section = "research" | "projects" | "leadership" | "beyond";

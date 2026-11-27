@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
   return [
     { url: base.toString(), changeFrequency: "monthly", priority: 1 },
+    { url: new URL("/projects", base).toString(), changeFrequency: "monthly", priority: 0.9 },
     ...entries,
   ];
 }

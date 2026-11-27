@@ -34,7 +34,10 @@ export function CardMedia({
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover transition duration-700 ease-out group-hover:scale-[1.03]"
+          className={cx(
+            entry.cover.fit === "contain" ? "object-contain p-3" : "object-cover",
+            "transition duration-700 ease-out group-hover:scale-[1.03]",
+          )}
           style={{ objectPosition: entry.cover.position ?? "center" }}
         />
       ) : entry.visual ? (

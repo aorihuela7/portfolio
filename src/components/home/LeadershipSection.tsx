@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
 import { leadership } from "@/data/portfolio";
 import { BentoCard, MetaBar, SectionHeader, Tag, cx } from "@/components/ui/Bento";
+import { InstagramIcon } from "@/components/ui/BrandIcons";
 import { RichText } from "@/components/ui/RichText";
 import { CardMedia } from "./CardMedia";
 
@@ -61,20 +62,35 @@ export function LeadershipSection() {
                 <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden />
               </span>
               {entry.links
-                ?.filter((l) => l.kind === "official")
-                .map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative z-10 inline-flex items-center gap-1.5 rounded-full border border-green/30 bg-green-soft px-3 py-1.5 font-mono text-[11px] font-medium text-green-ink transition hover:border-green"
-                  >
-                    <BadgeCheck className="size-3.5" aria-hidden />
-                    Official club page <ArrowUpRight className="size-3" aria-hidden />
-                    <span className="sr-only">(opens TottenhamHotspur.com in a new tab)</span>
-                  </a>
-                ))}
+                ?.filter((l) => l.kind === "official" || l.kind === "instagram")
+                .map((l) =>
+                  l.kind === "official" ? (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative z-10 inline-flex items-center gap-1.5 rounded-full border border-green/30 bg-green-soft px-3 py-1.5 font-mono text-[11px] font-medium text-green-ink transition hover:border-green"
+                    >
+                      <BadgeCheck className="size-3.5" aria-hidden />
+                      Official club page <ArrowUpRight className="size-3" aria-hidden />
+                      <span className="sr-only">(opens TottenhamHotspur.com in a new tab)</span>
+                    </a>
+                  ) : (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative z-10 inline-flex items-center gap-1.5 rounded-full border border-line bg-canvas px-3 py-1.5 font-mono text-[11px] font-medium text-ink-2 transition hover:border-line-strong hover:text-ink"
+                    >
+                      <InstagramIcon className="size-3.5" />
+                      {l.label.match(/@[\w.]+/)?.[0] ?? "Instagram"}{" "}
+                      <ArrowUpRight className="size-3" aria-hidden />
+                      <span className="sr-only">(opens Instagram in a new tab)</span>
+                    </a>
+                  ),
+                )}
             </div>
           </BentoCard>
         ))}

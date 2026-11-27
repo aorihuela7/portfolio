@@ -1,4 +1,4 @@
-import { Building2, CalendarDays, MapPin } from "lucide-react";
+import { ArrowUpRight, Building2, CalendarDays, Globe, MapPin } from "lucide-react";
 import { experience } from "@/data/portfolio";
 import { BentoCard, MetaBar, SectionHeader, Tag } from "@/components/ui/Bento";
 import { RichText } from "@/components/ui/RichText";
@@ -38,6 +38,18 @@ export function ExperienceSection() {
               </li>
             </ul>
             <p className="mt-5 text-[15px] leading-relaxed text-ink-2">{e.overview}</p>
+            <a
+              href={e.website.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-line bg-canvas px-3.5 py-2 font-mono text-xs font-medium text-ink-2 transition hover:border-line-strong hover:text-ink"
+            >
+              <Globe className="size-3.5" aria-hidden />
+              <span className="text-ink-3">Site I redesigned:</span>
+              {e.website.label}
+              <ArrowUpRight className="size-3.5" aria-hidden />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
             <ul className="mt-6 grid gap-4 sm:grid-cols-2">
               {e.bullets.map((b) => (
                 <li key={b.title} className="rounded-2xl border border-line bg-canvas p-4">

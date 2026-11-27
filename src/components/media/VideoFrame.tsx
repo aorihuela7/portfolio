@@ -11,7 +11,7 @@ export function VideoFrame({ video }: { video: Video }) {
           <span className="size-2 rounded-full bg-line-strong" />
         </span>
         <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-3">
-          Demo · {video.label}
+          {video.tag ?? "Demo"} · {video.label}
           {video.duration ? ` · ${video.duration}` : ""}
         </span>
       </div>
@@ -21,7 +21,8 @@ export function VideoFrame({ video }: { video: Video }) {
         controls
         playsInline
         preload="metadata"
-        className="aspect-[3/2] w-full rounded-2xl border border-line bg-black object-contain"
+        style={{ aspectRatio: video.aspect ?? "3 / 2" }}
+        className="w-full rounded-2xl border border-line bg-black object-contain"
       >
         Your browser does not support embedded video.
       </video>

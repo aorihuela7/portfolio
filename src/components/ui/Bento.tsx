@@ -98,12 +98,15 @@ export function SectionHeader({
   label,
   title,
   description,
+  action,
   id,
 }: {
   index: string;
   label: string;
   title: string;
   description?: string;
+  /** Optional link/button shown under the description. */
+  action?: ReactNode;
   id?: string;
 }) {
   return (
@@ -116,10 +119,13 @@ export function SectionHeader({
           {title}
         </h2>
       </div>
-      {description ? (
-        <p className="max-w-md text-sm leading-relaxed text-ink-2 md:text-right">
-          {description}
-        </p>
+      {description || action ? (
+        <div className="flex max-w-md flex-col gap-3 md:items-end">
+          {description ? (
+            <p className="text-sm leading-relaxed text-ink-2 md:text-right">{description}</p>
+          ) : null}
+          {action}
+        </div>
       ) : null}
     </div>
   );

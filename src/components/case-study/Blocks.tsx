@@ -1,7 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { Block, Media } from "@/data/types";
 import { Tag, cx } from "@/components/ui/Bento";
 import { RichText } from "@/components/ui/RichText";
+import { Gallery } from "@/components/media/Gallery";
+import { VideoFrame } from "@/components/media/VideoFrame";
 import { Visual } from "@/components/visuals/Visual";
 
 function Heading({ eyebrow, heading, index }: { eyebrow?: string; heading: string; index: number }) {
@@ -288,5 +292,120 @@ export function BlockRenderer({ block, index }: { block: Block; index: number })
           <p className="text-xl font-semibold leading-snug sm:text-2xl">{block.text}</p>
         </section>
       );
+
+    case "timeline":
+      return (
+        <section>
+          <Heading eyebrow={block.eyebrow} heading={block.heading} index={index} />
+          <Intro text={block.intro} />
+          <ol className="relative grid gap-4 before:absolute before:bottom-6 before:left-[13px] before:top-6 before:w-px before:bg-line sm:gap-5">
+            {block.items.map((item, i) => (
+              <li key={i} className="relative grid grid-cols-[28px_1fr] gap-3 sm:gap-5">
+                <span
+                  aria-hidden
+                  className="relative z-10 mt-5 flex size-7 items-center justify-center rounded-full border border-accent-line bg-surface"
+                >
+                  <span className="size-2 rounded-full bg-accent" />
+                </span>
+                <div
+                  className={cx(
+                    "grid gap-4 rounded-2xl border border-line bg-surface p-4 sm:p-5",
+                    item.media &&
+                      (item.media.fit === "contain"
+                        ? "lg:grid-cols-[1fr_minmax(0,56%)] lg:items-start"
+                        : "md:grid-cols-[1fr_minmax(0,40%)] md:items-start"),
+                  )}
+                >
+                  <div className="min-w-0">
+                    <p className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-accent-ink">
+                      {item.kicker}
+                    </p>
+                    <h3 className="mt-1.5 text-lg font-bold leading-snug text-ink">{item.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
+                      <RichText text={item.body} />
+                    </p>
+                  </div>
+                  {item.media ? (
+                    <figure className="overflow-hidden rounded-xl border border-line bg-canvas">
+                      <div className={cx("relative", item.media.fit === "contain" ? "aspect-[10/7]" : "aspect-[4/3]")}>
+                        <Image
+                          src={item.media.src}
+                          alt={item.media.alt}
+                          fill
+                          sizes={
+                            item.media.fit === "contain"
+                              ? "(min-width: 1024px) 560px, 90vw"
+                              : "(min-width: 1024px) 380px, (min-width: 768px) 40vw, 90vw"
+                          }
+                          className={item.media.fit === "contain" ? "object-contain p-1.5" : "object-cover"}
+                          style={{ objectPosition: item.media.position ?? "center" }}
+                        />
+                      </div>
+                      {item.media.caption ? (
+                        <figcaption className="border-t border-line px-3 py-2 text-xs text-ink-2">
+                          {item.media.caption}
+                        </figcaption>
+                      ) : null}
+                    </figure>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      );
+
+    case "gallery":
+      return (
+        <section>
+          <Heading eyebrow={block.eyebrow} heading={block.heading} index={index} />
+          <Intro text={block.intro} />
+          <Gallery
+            images={block.images}
+            columns={block.columns ?? (block.images.length % 2 === 0 ? 2 : 3)}
+            label={block.heading}
+          />
+        </section>
+      );
+
+    case "video":
+      return (
+        <section>
+          <Heading eyebrow={block.eyebrow} heading={block.heading} index={index} />
+          <Intro text={block.intro} />
+          <VideoFrame video={block.video} />
+        </section>
+      );
+
+    case "cta": {
+      const external = !block.href.startsWith("/");
+      const className =
+        "inline-flex h-11 shrink-0 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-canvas transition hover:opacity-90";
+      return (
+        <section className="flex flex-col gap-5 rounded-3xl border border-line bg-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div className="max-w-2xl">
+            <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-3">
+              <span className="text-accent-ink">{String(index).padStart(2, "0")}</span>
+              {block.eyebrow ? ` / ${block.eyebrow}` : null}
+            </p>
+            <h2 className="text-xl font-extrabold leading-tight text-ink sm:text-2xl">
+              {block.heading}
+            </h2>
+            <p className="mt-2 text-[15px] leading-relaxed text-ink-2">
+              <RichText text={block.text} />
+            </p>
+          </div>
+          {external ? (
+            <a href={block.href} target="_blank" rel="noopener noreferrer" className={className}>
+              {block.label} <ArrowUpRight className="size-4" aria-hidden />
+            </a>
+          ) : (
+            <Link href={block.href} className={className}>
+              {block.label} <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          )}
+        </section>
+      );
+    }
   }
 }

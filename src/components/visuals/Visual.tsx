@@ -1,6 +1,6 @@
 import type { VisualKey } from "@/data/types";
 import { HydrationStates } from "./HydrationStates";
-import { FlightArc, RunningSplits } from "./Mini";
+import { RunningSplits } from "./Mini";
 import { NewsletterPipeline } from "./NewsletterPipeline";
 import { PkiPipeline } from "./PkiPipeline";
 import { TerminalCard } from "./TerminalCard";
@@ -24,8 +24,6 @@ export function Visual({ name, className }: { name: VisualKey; className?: strin
     case "newsletter":
       return <NewsletterPipeline />;
     case "running":
-      return <RunningSplits className={className} />;
-    case "aviation":
-      return <FlightArc className={className} />;
+      return <RunningSplits className={`bg-surface-2 ${className ?? ""}`} />;
   }
 }
